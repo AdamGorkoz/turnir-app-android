@@ -1,6 +1,7 @@
 package turka.turnirapp.views.fragment;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -18,37 +19,33 @@ import javax.inject.Inject;
 
 import turka.turnirapp.AndroidApplication;
 import turka.turnirapp.R;
-import turka.turnirapp.di.di.components.DaggerPlayersComponent;
+import turka.turnirapp.di.di.components.DaggerTeamMatchesComponent;
 import turka.turnirapp.model.LeagueTeam;
-import turka.turnirapp.model.Player;
-import turka.turnirapp.mvp.presenters.TeamPlayersPresenter;
-import turka.turnirapp.mvp.views.TeamPlayersView;
-import turka.turnirapp.views.adapter.TeamPlayersAdapter;
+import turka.turnirapp.model.TeamMatch;
+import turka.turnirapp.mvp.presenters.TeamMatchesPresenter;
+import turka.turnirapp.mvp.views.TeamMatchesView;
+import turka.turnirapp.views.adapter.TeamMatchesAdapter;
 
-public class TeamPlayersFragment extends Fragment implements TeamPlayersView {
+public class TeamMatchesFragment extends Fragment implements TeamMatchesView {
 
     private static final String TEAM_PARAM = "TEAM_PARAM";
 
     private Context mContext;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private TeamPlayersAdapter mAdapter;
-    private RecyclerView playersList;
-    private TextView noTeamPlayersTextView;
+    private TeamMatchesAdapter mAdapter;
+    private RecyclerView matchesList;
+    private TextView noTeamMatchesTextView;
     private LeagueTeam mLeagueTeam;
 
     @Inject
-    TeamPlayersPresenter presenter;
+    TeamMatchesPresenter presenter;
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
-    public TeamPlayersFragment() {
+    public TeamMatchesFragment() {
+        // Required empty public constructor
     }
 
-    @SuppressWarnings("unused")
-    public static TeamPlayersFragment newInstance(LeagueTeam leagueTeam) {
-        TeamPlayersFragment fragment = new TeamPlayersFragment();
+    public static TeamMatchesFragment newInstance(LeagueTeam leagueTeam) {
+        TeamMatchesFragment fragment = new TeamMatchesFragment();
         Bundle args = new Bundle();
         args.putParcelable(TEAM_PARAM, leagueTeam);
         fragment.setArguments(args);
@@ -73,26 +70,26 @@ public class TeamPlayersFragment extends Fragment implements TeamPlayersView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         AndroidApplication app = (AndroidApplication) getActivity().getApplication();
-        DaggerPlayersComponent.builder()
+        DaggerTeamMatchesComponent.builder()
                 .applicationComponent(app.getApplicationComponent())
                 .build().inject(this);
 
-        View fragmentView =  inflater.inflate(R.layout.fragment_player_list, container, false);
+        View fragmentView =  inflater.inflate(R.layout.fragment_team_matches, container, false);
         swipeRefreshLayout = (SwipeRefreshLayout) fragmentView.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeColors(getResources().getIntArray(R.array.swipeRefreshColors));
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                presenter.fetchTeamPlayers();
+                presenter.fetchTeamMatches();
             }
         });
 
 
 
-        noTeamPlayersTextView = (TextView) fragmentView.findViewById(R.id.no_team_players);
-        playersList = (RecyclerView) fragmentView.findViewById(R.id.team_players_list);
+        noTeamMatchesTextView = (TextView) fragmentView.findViewById(R.id.no_team_matches);
+        matchesList = (RecyclerView) fragmentView.findViewById(R.id.team_matches_list);
 
-        setupPlayersView();
+        setupTeamMatchesView();
         initPresenter();
 
         return fragmentView;
@@ -103,13 +100,13 @@ public class TeamPlayersFragment extends Fragment implements TeamPlayersView {
         presenter.onCreate();
     }
 
-    private void setupPlayersView() {
+    private void setupTeamMatchesView() {
 
         LinearLayoutManager mLinearLayoutManagerVertical = new LinearLayoutManager(mContext);
         mLinearLayoutManagerVertical.setOrientation(LinearLayoutManager.VERTICAL);
-        playersList.setLayoutManager(mLinearLayoutManagerVertical);
+        matchesList.setLayoutManager(mLinearLayoutManagerVertical);
 
-        playersList.setItemAnimator(new DefaultItemAnimator());
+        matchesList.setItemAnimator(new DefaultItemAnimator());
     }
 
 
@@ -125,10 +122,10 @@ public class TeamPlayersFragment extends Fragment implements TeamPlayersView {
     }
 
     @Override
-    public void updateTeamPlayers(List<Player> players) {
+    public void updateTeamMatches(List<TeamMatch> matches) {
         if(mAdapter == null){
-            mAdapter = new TeamPlayersAdapter(mContext, players);
-            playersList.setAdapter(mAdapter);
+            mAdapter = new TeamMatchesAdapter(mContext, matches);
+            matchesList.setAdapter(mAdapter);
         }
         else{
             mAdapter.notifyDataSetChanged();
@@ -146,16 +143,16 @@ public class TeamPlayersFragment extends Fragment implements TeamPlayersView {
     }
 
     @Override
-    public void showNoPlayersView() {
-        playersList.setVisibility(View.GONE);
-        noTeamPlayersTextView.setVisibility(View.VISIBLE);
+    public void showNoMatchesView() {
+        matchesList.setVisibility(View.GONE);
+        noTeamMatchesTextView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideNoPlayersView() {
-        if(playersList.getVisibility() != View.VISIBLE){
-            playersList.setVisibility(View.VISIBLE);
-            noTeamPlayersTextView.setVisibility(View.INVISIBLE);
+    public void hideNoMatchesView() {
+        if(matchesList.getVisibility() != View.VISIBLE){
+            matchesList.setVisibility(View.VISIBLE);
+            noTeamMatchesTextView.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -163,5 +160,4 @@ public class TeamPlayersFragment extends Fragment implements TeamPlayersView {
     public int getTeamId() {
         return mLeagueTeam.getID();
     }
-
 }

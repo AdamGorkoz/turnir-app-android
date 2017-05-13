@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import turka.turnirapp.model.LeagueTeam;
 import turka.turnirapp.views.BaseActivity;
+import turka.turnirapp.views.fragment.TeamMatchesFragment;
 import turka.turnirapp.views.fragment.TeamPlayersFragment;
 import turka.turnirapp.views.fragment.TeamStatsFragment;
 
@@ -115,7 +116,7 @@ public class TeamActivity extends BaseActivity {
                 case 1:
                     return TeamPlayersFragment.newInstance(mLeagueTeam);
                 default:
-                    return TeamStatsFragment.newInstance(mLeagueTeam);
+                    return TeamMatchesFragment.newInstance(mLeagueTeam);
             }
 
         }

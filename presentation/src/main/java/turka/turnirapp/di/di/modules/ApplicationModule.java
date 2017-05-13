@@ -5,11 +5,13 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.repository.LeagueRepository;
+import com.repository.MatchesRepository;
 import com.repository.MessagesRepository;
 import com.repository.PlayersRepository;
 
 import net.ApiConstants;
 import net.LeagueApi;
+import net.MatchesApi;
 import net.MessagesApi;
 import net.PlayersApi;
 
@@ -22,6 +24,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import repository.league.LeagueRepositoryImpl;
+import repository.matches.MatchesRepositoryImpl;
 import repository.messages.MessagesRepositoryImpl;
 import repository.players.PlayersRepositoryImpl;
 import retrofit2.Retrofit;
@@ -43,6 +46,21 @@ public class ApplicationModule {
     public ApplicationModule(AndroidApplication application,Context context) {
         this.application = application;
         this.context = context;
+    }
+
+    private Retrofit getRestApiAdapter(){
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+        return new Retrofit.Builder()
+                .baseUrl(ApiConstants.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(okHttpClient)
+                .build();
     }
 
     @Provides
@@ -71,54 +89,28 @@ public class ApplicationModule {
     }
 
     @Provides @Singleton
-    MessagesApi provideMessagesApi(){
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
+    MatchesRepository provideMatchesRepository(MatchesRepositoryImpl restDataSource) {
+        return restDataSource;
+    }
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        Retrofit restApiAdapter = new Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
-        return restApiAdapter.create(MessagesApi.class);
+    @Provides @Singleton
+    MessagesApi provideMessagesApi(){
+        return getRestApiAdapter().create(MessagesApi.class);
     }
 
     @Provides @Singleton
     LeagueApi provideLeagueApi(){
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
-
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        Retrofit restApiAdapter = new Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
-        return restApiAdapter.create(LeagueApi.class);
+        return getRestApiAdapter().create(LeagueApi.class);
     }
 
     @Provides @Singleton
     PlayersApi providePlayersApi(){
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
+        return getRestApiAdapter().create(PlayersApi.class);
+    }
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
-        Retrofit restApiAdapter = new Retrofit.Builder()
-                .baseUrl(ApiConstants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
-        return restApiAdapter.create(PlayersApi.class);
+    @Provides @Singleton
+    MatchesApi provideMatchesApi(){
+        return getRestApiAdapter().create(MatchesApi.class);
     }
 
 

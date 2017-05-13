@@ -61,10 +61,10 @@ public class TeamPlayersPresenter implements Presenter {
         mTeamPlayersView.showLoadingIndicator();
         mGetTeamPlayersUsecase.setTeamId(mTeamPlayersView.getTeamId());
         mGetTeamPlayersUsecase.setForceUpdate(true);
-        mGetTeamPlayersUsecase.execute(new LeagueSubscriber());
+        mGetTeamPlayersUsecase.execute(new TeamPlayersSubscriber());
     }
 
-    private final class LeagueSubscriber extends DefaultSubscriber<List<PlayerModel>> {
+    private final class TeamPlayersSubscriber extends DefaultSubscriber<List<PlayerModel>> {
 
         @Override public void onCompleted() {
             mTeamPlayersView.hideLoadingIndicator();
