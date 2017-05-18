@@ -5,6 +5,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -102,7 +103,7 @@ public class TeamActivity extends BaseActivity {
 
 
 
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -115,8 +116,9 @@ public class TeamActivity extends BaseActivity {
                     return TeamStatsFragment.newInstance(mLeagueTeam);
                 case 1:
                     return TeamPlayersFragment.newInstance(mLeagueTeam);
-                default:
+                case 2:
                     return TeamMatchesFragment.newInstance(mLeagueTeam);
+                default: return null;
             }
 
         }

@@ -32,7 +32,7 @@ public class TeamPlayersAdapter extends RecyclerView.Adapter<TeamPlayersAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Player current = mPlayers.get(position);
-        holder.itemView.setBackgroundColor(position % 2  == 0 ? Color.rgb(245,245,245) : Color.rgb(250,250,250));
+        holder.itemView.setBackgroundColor(position % 2  == 0 ? Color.rgb(244, 252, 250) : Color.rgb(255,255,255));
         holder.setData(current);
     }
 

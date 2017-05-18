@@ -68,10 +68,6 @@ public class MainActivity extends BaseActivity
             case R.id.nav_league:
                 fragmentClass = LeagueFragment.class;
                 break;
-            case R.id.nav_slideshow:
-                break;
-            case R.id.nav_manage:
-                break;
             default:
                 fragmentClass = MessageFragment.class;
         }

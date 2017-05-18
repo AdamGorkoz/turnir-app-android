@@ -38,7 +38,7 @@ public class TeamMatchesAdapter extends RecyclerView.Adapter<TeamMatchesAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         TeamMatch current = mMatches.get(position);
-        holder.itemView.setBackgroundColor(position % 2  == 0 ? Color.rgb(245,245,245) : Color.rgb(250,250,250));
+        holder.itemView.setBackgroundColor(position % 2  == 0 ? Color.rgb(244, 252, 250) : Color.rgb(255,255,255));
         holder.setData(current);
     }
 

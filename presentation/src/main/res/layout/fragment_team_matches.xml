@@ -21,7 +21,8 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:elevation="2dp">
                 <TextView
                     android:id="@+id/match_date_label"
                     android:layout_width="wrap_content"
