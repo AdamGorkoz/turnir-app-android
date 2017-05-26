@@ -1,5 +1,7 @@
 package net;
 
+import com.models.CardModel;
+import com.models.GoalModel;
 import com.models.TeamMatchModel;
 
 import java.util.List;
@@ -15,4 +17,10 @@ import rx.Observable;
 public interface MatchesApi {
     @GET("team/{id}/history")
     Observable<List<TeamMatchModel>> getTeamMatches(@Path("id")int id);
+
+    @GET("match/{id}/goals")
+    Observable<List<GoalModel>> getMatchGoals(@Path("id")int id);
+
+    @GET("match/{id}/cards")
+    Observable<List<CardModel>> getMatchCards(@Path("id")int id);
 }

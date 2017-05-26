@@ -8,7 +8,7 @@
             android:title="@string/nav_messages" />
         <item
             android:id="@+id/nav_league"
-            android:icon="@drawable/format_list_numbers"
+            android:icon="@drawable/ic_format_list_numbered"
             android:title="League" />
     </group>
 </menu>

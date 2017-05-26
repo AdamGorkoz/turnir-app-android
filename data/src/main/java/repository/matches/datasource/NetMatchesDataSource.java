@@ -1,5 +1,7 @@
 package repository.matches.datasource;
 
+import com.models.CardModel;
+import com.models.GoalModel;
 import com.models.TeamMatchModel;
 
 import net.MatchesApi;
@@ -25,5 +27,15 @@ public class NetMatchesDataSource implements MatchesDataSource {
     @Override
     public Observable<List<TeamMatchModel>> teamMatchesList(int teamId) {
         return matchesApi.getTeamMatches(teamId);
+    }
+
+    @Override
+    public Observable<List<GoalModel>> matchGoals(int matchId) {
+        return matchesApi.getMatchGoals(matchId);
+    }
+
+    @Override
+    public Observable<List<CardModel>> matchCards(int matchId) {
+        return matchesApi.getMatchCards(matchId);
     }
 }

@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import turka.turnirapp.AndroidApplication;
 import turka.turnirapp.R;
-import turka.turnirapp.di.di.components.DaggerTeamMatchesComponent;
+import turka.turnirapp.di.di.components.DaggerMatchesComponent;
 import turka.turnirapp.model.LeagueTeam;
 import turka.turnirapp.model.TeamMatch;
 import turka.turnirapp.mvp.presenters.TeamMatchesPresenter;
@@ -70,7 +70,7 @@ public class TeamMatchesFragment extends Fragment implements TeamMatchesView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         AndroidApplication app = (AndroidApplication) getActivity().getApplication();
-        DaggerTeamMatchesComponent.builder()
+        DaggerMatchesComponent.builder()
                 .applicationComponent(app.getApplicationComponent())
                 .build().inject(this);
 
@@ -124,7 +124,7 @@ public class TeamMatchesFragment extends Fragment implements TeamMatchesView {
     @Override
     public void updateTeamMatches(List<TeamMatch> matches) {
         if(mAdapter == null){
-            mAdapter = new TeamMatchesAdapter(mContext, matches);
+            mAdapter = new TeamMatchesAdapter(mContext, matches,mLeagueTeam);
             matchesList.setAdapter(mAdapter);
         }
         else{

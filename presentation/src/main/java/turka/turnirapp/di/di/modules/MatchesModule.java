@@ -1,6 +1,7 @@
 package turka.turnirapp.di.di.modules;
 
 import com.repository.MatchesRepository;
+import com.usecase.GetMatchInfoUsecase;
 import com.usecase.GetTeamMatchesUsecase;
 import com.usecase.Usecase;
 
@@ -24,5 +25,12 @@ public class MatchesModule {
     @PerActivity
     Usecase provideGetTeamMatchesUsecase(MatchesRepository matchesRepository, Scheduler uiThread, Scheduler executorThread) {
         return new GetTeamMatchesUsecase(matchesRepository,uiThread, executorThread);
+    }
+
+
+    @Provides
+    @PerActivity
+    Usecase provideGetMatchInfoUsecase(MatchesRepository matchesRepository, Scheduler uiThread, Scheduler executorThread) {
+        return new GetMatchInfoUsecase(matchesRepository,uiThread, executorThread);
     }
 }

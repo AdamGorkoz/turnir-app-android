@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp">
+        <TextView
+            android:id="@+id/event_player_name_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="15sp"
+            android:padding="3dp"/>
+        <TextView
+            android:id="@+id/event_minute_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/event_player_name_left"
+            android:layout_centerInParent="true"
+            android:textSize="15sp"
+            android:padding="3dp"/>
+        <ImageView
+            android:id="@+id/ball_image_left"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/soccerball"
+            android:layout_toRightOf="@id/event_minute_left"
+            android:layout_centerVertical="true"
+            android:padding="3dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/event_player_name_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textSize="15sp"
+            android:padding="3dp"/>
+        <TextView
+            android:id="@+id/event_minute_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/event_player_name_right"
+            android:layout_centerInParent="true"
+            android:textSize="15sp"
+            android:padding="3dp"/>
+
+        <ImageView
+            android:id="@+id/ball_image_right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/soccerball"
+            android:layout_toRightOf="@id/event_minute_right"
+            android:layout_centerVertical="true"
+            android:padding="3dp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+</LinearLayout>
