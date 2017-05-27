@@ -27,13 +27,13 @@
                     android:id="@+id/player_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name"
+                    android:text="@string/player_name"
                     android:textAlignment="center"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Goals"
+                    android:text="@string/player_goals"
                     android:id="@+id/player_points"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
@@ -57,7 +57,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:text="@string/no_team_players_to_display"/>
 
 </RelativeLayout>

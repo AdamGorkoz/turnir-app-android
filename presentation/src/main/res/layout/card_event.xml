@@ -16,14 +16,17 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:padding="3dp"/>
         <TextView
             android:id="@+id/event_minute_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/event_player_name_left"
+            android:layout_toEndOf="@id/event_player_name_left"
             android:layout_centerInParent="true"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:padding="3dp"/>
         <ImageView
             android:id="@+id/card_yellow_image_left"
@@ -31,6 +34,7 @@
             android:layout_height="20dp"
             android:src="@drawable/card_yellow_24dp"
             android:layout_toRightOf="@id/event_minute_left"
+            android:layout_toEndOf="@id/event_minute_left"
             android:layout_centerVertical="true"
             android:padding="3dp"
             android:visibility="gone"/>
@@ -40,6 +44,7 @@
             android:layout_height="20dp"
             android:src="@drawable/card_red_24dp"
             android:layout_toRightOf="@id/event_minute_left"
+            android:layout_toEndOf="@id/event_minute_left"
             android:layout_centerVertical="true"
             android:padding="3dp"
             android:visibility="gone"/>
@@ -57,14 +62,17 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:padding="3dp"/>
         <TextView
             android:id="@+id/event_minute_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/event_player_name_right"
+            android:layout_toEndOf="@id/event_player_name_right"
             android:layout_centerInParent="true"
             android:textSize="15sp"
+            android:textColor="@color/black"
             android:padding="3dp"/>
 
         <ImageView
@@ -73,6 +81,7 @@
             android:layout_height="20dp"
             android:src="@drawable/card_yellow_24dp"
             android:layout_toRightOf="@id/event_minute_right"
+            android:layout_toEndOf="@id/event_minute_right"
             android:layout_centerVertical="true"
             android:padding="3dp"
             android:visibility="gone"/>
@@ -82,6 +91,7 @@
             android:layout_height="20dp"
             android:src="@drawable/card_red_24dp"
             android:layout_toRightOf="@id/event_minute_right"
+            android:layout_toEndOf="@id/event_minute_right"
             android:layout_centerVertical="true"
             android:padding="3dp"
             android:visibility="gone"/>

@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -85,9 +86,13 @@ public class TeamMatchActivity extends BaseActivity implements MatchView, AppBar
         mTeamMatch = intent.getParcelableExtra("match");
 
         mScore.setText(mTeamMatch.getScore());
+        String locale = Locale.getDefault().getLanguage();
+        if(locale == "he" || locale == "iw"){
+            mScore.setText(new StringBuilder(mTeamMatch.getScore()).reverse().toString());
+        }
         mTeamAName.setText(mLeagueTeam.getName());
         mTeamBName.setText(mTeamMatch.getOpponent());
-        mTimer.setText("Full time");
+        mTimer.setText(getString(R.string.full_time));
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         eventsList = (RecyclerView) findViewById(R.id.match_events_list);
 

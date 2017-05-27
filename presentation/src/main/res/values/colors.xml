@@ -5,6 +5,7 @@
     <color name="colorAccent">#ffffff</color>
     <color name="white">#ffffff</color>
     <color name="colorPrimaryLight">#00BF9A</color>
+    <color name="black">#000000</color>
     <array name="swipeRefreshColors">
         <item>@color/colorPrimary</item>
         <item>@color/colorPrimaryDark</item>

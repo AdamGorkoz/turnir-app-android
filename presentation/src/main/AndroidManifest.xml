@@ -14,7 +14,7 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/messages_title"
+            android:label="Adiga Mundial"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,6 @@
         </activity>
         <activity
             android:name=".TeamActivity"
-            android:label="@string/title_activity_team"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -33,7 +32,6 @@
         </activity>
         <activity
             android:name=".TeamMatchActivity"
-            android:label="@string/title_activity_team_match"
             android:parentActivityName=".TeamActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar">

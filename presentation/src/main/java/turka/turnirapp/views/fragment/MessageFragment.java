@@ -81,7 +81,6 @@ public class MessageFragment extends Fragment implements MessagesListView {
             }
         });
 
-
         noMessagesTextView = (TextView) fragmentView.findViewById(R.id.no_messages);
         messagesList = (RecyclerView) fragmentView.findViewById(R.id.messages_list);
 
@@ -142,7 +141,7 @@ public class MessageFragment extends Fragment implements MessagesListView {
     @Override
     public void showNoMessagesView() {
         messagesList.setVisibility(View.GONE);
-        noMessagesTextView.setVisibility(View.VISIBLE);
+        noMessagesTextView.setVisibility(View.VISIBLE );
     }
 
     @Override

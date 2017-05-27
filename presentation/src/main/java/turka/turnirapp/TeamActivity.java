@@ -133,11 +133,11 @@ public class TeamActivity extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Stats";
+                    return getString(R.string.stats_title);
                 case 1:
-                    return "Players";
+                    return getString(R.string.players_title);
                 case 2:
-                    return "Matches";
+                    return getString(R.string.matches_title);
             }
             return null;
         }

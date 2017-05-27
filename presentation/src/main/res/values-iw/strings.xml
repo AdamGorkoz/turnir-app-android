@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Adiga Mundial</string>
+    <string name="action_settings">הגדרות</string>
+    <string name="full_time">סיום</string>
+    <string name="league_diff">יחס</string>
+    <string name="league_pts">נק\'</string>
+    <string name="league_team">קבוצה</string>
+    <string name="leauge_pld">מש\'</string>
+    <string name="match_date">תאריך</string>
+    <string name="match_opponent">קבוצה</string>
+    <string name="match_score">תוצאה</string>
+    <string name="matches_title">משחקים</string>
+    <string name="messages_title">הודעות</string>
+    <string name="nav_league">ליגה</string>
+    <string name="nav_menu_title">תפריט</string>
+    <string name="nav_messages">הודעות</string>
+    <string name="navigation_drawer_close">סגור</string>
+    <string name="navigation_drawer_open">פתח</string>
+    <string name="no_league">אין קבוצות</string>
+    <string name="no_messages">אין הודעות</string>
+    <string name="no_team_matches_to_display">אין משחקים</string>
+    <string name="no_team_players_to_display">אין שחקנים</string>
+    <string name="player_goals">שערים</string>
+    <string name="player_name">שם</string>
+    <string name="players_title">שחקנים</string>
+    <string name="stats_title">נתונים</string>
+    <string name="team_stats_diff">יחס</string>
+    <string name="team_stats_draws">תיקו</string>
+    <string name="team_stats_goals">שערים</string>
+    <string name="team_stats_losses">הפסדים</string>
+    <string name="team_stats_matches_played">משחקים</string>
+    <string name="team_stats_points">נקודות</string>
+    <string name="team_stats_position">מיקום</string>
+    <string name="team_stats_wins">נצחונות</string>
+</resources>

@@ -18,7 +18,7 @@ import rx.functions.Action1;
  * Created by turka on 10/29/2016.
  */
 
-public class tests {
+public class DataTests {
     @Test
     public void something(){
        NetMessagesDataStore x =  new NetMessagesDataStore(new MessagesApi() {

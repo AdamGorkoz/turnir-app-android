@@ -27,20 +27,20 @@
                     android:id="@+id/match_date_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Date"
+                    android:text="@string/match_date"
                     android:textAlignment="viewStart"
                     android:layout_gravity="start"
                     android:layout_weight="1"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="opponent"
+                    android:text="@string/match_opponent"
                     android:id="@+id/match_opponent_label"
                     android:layout_weight="2"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="score"
+                    android:text="@string/match_score"
                     android:textAlignment="center"
                     android:id="@+id/match_score_label"
                     android:layout_weight="1"/>

@@ -29,6 +29,7 @@ public class MainActivity extends BaseActivity
         AndroidApplication app = (AndroidApplication) getApplication();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setTitle(getString(R.string.messages_title));
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
