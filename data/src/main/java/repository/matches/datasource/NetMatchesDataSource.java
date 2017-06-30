@@ -2,6 +2,8 @@ package repository.matches.datasource;
 
 import com.models.CardModel;
 import com.models.GoalModel;
+import com.models.LiveMatchModel;
+import com.models.MatchRequestFilter;
 import com.models.TeamMatchModel;
 
 import net.MatchesApi;
@@ -37,5 +39,12 @@ public class NetMatchesDataSource implements MatchesDataSource {
     @Override
     public Observable<List<CardModel>> matchCards(int matchId) {
         return matchesApi.getMatchCards(matchId);
+    }
+
+    @Override
+    public Observable<List<LiveMatchModel>> liveMatchesList() {
+        MatchRequestFilter filter = new MatchRequestFilter();
+        filter.setShowAll(false);
+        return matchesApi.getLiveMatches(filter);
     }
 }

@@ -2,6 +2,7 @@ package com.repository;
 
 import com.models.CardModel;
 import com.models.GoalModel;
+import com.models.LiveMatchModel;
 import com.models.TeamMatchModel;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface MatchesRepository {
     Observable<List<TeamMatchModel>> getTeamMatches(int teamId, boolean isForceUpdate);
     Observable<List<GoalModel>> getMatchGoals(int matchId);
     Observable<List<CardModel>> getMatchCards(int matchId);
+    Observable<List<LiveMatchModel>> getLiveMatches();
 }

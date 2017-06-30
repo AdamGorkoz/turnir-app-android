@@ -88,8 +88,10 @@ public class TeamMatchActivity extends BaseActivity implements MatchView, AppBar
         mScore.setText(mTeamMatch.getScore());
         String locale = Locale.getDefault().getLanguage();
         if(locale == "he" || locale == "iw"){
-            mScore.setText(new StringBuilder(mTeamMatch.getScore()).reverse().toString());
+            String [] scoreArray = mTeamMatch.getScore().split("-");
+            mScore.setText(scoreArray[1] + "-" + scoreArray[0]);
         }
+
         mTeamAName.setText(mLeagueTeam.getName());
         mTeamBName.setText(mTeamMatch.getOpponent());
         mTimer.setText(getString(R.string.full_time));
@@ -146,10 +148,10 @@ public class TeamMatchActivity extends BaseActivity implements MatchView, AppBar
         float timerSizeToSubtract = 5f;
         mTimer.setTextSize(20f - (timerSizeToSubtract *percentage));
         float scoreSizeToSubtract = 10f;
-        mScore.setTextSize(30f - (scoreSizeToSubtract * percentage));
+        mScore.setTextSize(25f - (scoreSizeToSubtract * percentage));
         float teamSizeToSubtract = 5f;
-        mTeamAName.setTextSize(35f - (teamSizeToSubtract *percentage));
-        mTeamBName.setTextSize(35f - (teamSizeToSubtract *percentage));
+        mTeamAName.setTextSize(30f - (teamSizeToSubtract *percentage));
+        mTeamBName.setTextSize(30f - (teamSizeToSubtract *percentage));
 
         final float marginTopToAdd = (maxScroll / 2) - (mTeamAName.getHeight() / 4);
 

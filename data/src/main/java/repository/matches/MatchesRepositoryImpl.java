@@ -2,6 +2,7 @@ package repository.matches;
 
 import com.models.CardModel;
 import com.models.GoalModel;
+import com.models.LiveMatchModel;
 import com.models.TeamMatchModel;
 import com.repository.MatchesRepository;
 
@@ -38,5 +39,10 @@ public class MatchesRepositoryImpl implements MatchesRepository {
     @Override
     public Observable<List<CardModel>> getMatchCards(int matchId) {
         return netMatchesDataSource.matchCards(matchId);
+    }
+
+    @Override
+    public Observable<List<LiveMatchModel>> getLiveMatches() {
+        return netMatchesDataSource.liveMatchesList();
     }
 }

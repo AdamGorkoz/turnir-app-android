@@ -9,13 +9,10 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 
-import javax.inject.Inject;
-
-import turka.turnirapp.di.di.components.DaggerMessagesComponent;
 import turka.turnirapp.views.fragment.LeagueFragment;
+import turka.turnirapp.views.fragment.LiveMatchesFragment;
 import turka.turnirapp.views.fragment.MessageFragment;
 import turka.turnirapp.views.BaseActivity;
 
@@ -57,7 +54,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment = null;
@@ -68,6 +64,9 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.nav_league:
                 fragmentClass = LeagueFragment.class;
+                break;
+            case R.id.nav_live_matches:
+                fragmentClass = LiveMatchesFragment.class;
                 break;
             default:
                 fragmentClass = MessageFragment.class;

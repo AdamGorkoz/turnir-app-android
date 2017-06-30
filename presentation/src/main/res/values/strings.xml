@@ -36,4 +36,6 @@
     <string name="team_stats_losses">Losses</string>
     <string name="team_stats_goals">Goals</string>
     <string name="team_stats_diff">Diff</string>
+    <string name="live_matches">Live matches</string>
+    <string name="no_live_matches">No live matches to display</string>
 </resources>

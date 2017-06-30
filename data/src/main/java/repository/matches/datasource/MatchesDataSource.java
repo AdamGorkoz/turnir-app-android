@@ -2,6 +2,8 @@ package repository.matches.datasource;
 
 import com.models.CardModel;
 import com.models.GoalModel;
+import com.models.LiveMatchModel;
+import com.models.MatchRequestFilter;
 import com.models.TeamMatchModel;
 
 import java.util.List;
@@ -15,4 +17,5 @@ public interface MatchesDataSource {
     Observable<List<TeamMatchModel>> teamMatchesList(int teamId);
     Observable<List<GoalModel>> matchGoals(int matchId);
     Observable<List<CardModel>> matchCards(int matchId);
+    Observable<List<LiveMatchModel>> liveMatchesList();
 }

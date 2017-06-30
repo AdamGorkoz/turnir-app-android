@@ -5,6 +5,8 @@ import turka.turnirapp.TeamMatchActivity;
 import turka.turnirapp.di.di.PerActivity;
 import turka.turnirapp.di.di.modules.ActivityModule;
 import turka.turnirapp.di.di.modules.MatchesModule;
+import turka.turnirapp.mvp.views.LiveMatchesListView;
+import turka.turnirapp.views.fragment.LiveMatchesFragment;
 import turka.turnirapp.views.fragment.TeamMatchesFragment;
 
 /**
@@ -16,4 +18,5 @@ import turka.turnirapp.views.fragment.TeamMatchesFragment;
 public interface MatchesComponent {
     void inject (TeamMatchesFragment fragment);
     void inject (TeamMatchActivity activity);
+    void inject (LiveMatchesFragment fragment);
 }

@@ -5,7 +5,7 @@ package net;
  */
 
 public final class ApiConstants {
-    public static final String BASE_URL = "http://www.adiga-mundial.com/rest/";
+    public static final String BASE_URL = "http://adiga-mundial.com/rest/";
 
     private ApiConstants() {
     }
