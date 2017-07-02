@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by turka on 5/13/2017.
  */
 
-public class TeamMatch  implements Parcelable {
+public class TeamMatch implements Parcelable {
 
     private int ID;
     private Date MatchDate;

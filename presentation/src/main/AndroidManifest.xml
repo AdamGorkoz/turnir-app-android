@@ -32,12 +32,22 @@
         </activity>
         <activity
             android:name=".TeamMatchActivity"
-            android:parentActivityName=".TeamActivity"
             android:launchMode="singleTop"
+            android:parentActivityName=".TeamActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="turka.turnirapp.TeamActivity" />
+        </activity>
+
+        <activity
+            android:name=".LiveMatchActivity"
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="turka.turnirapp.MainActivity" />
         </activity>
     </application>
 

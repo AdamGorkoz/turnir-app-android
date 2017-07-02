@@ -1,6 +1,7 @@
 package turka.turnirapp.di.di.components;
 
 import dagger.Component;
+import turka.turnirapp.LiveMatchActivity;
 import turka.turnirapp.TeamMatchActivity;
 import turka.turnirapp.di.di.PerActivity;
 import turka.turnirapp.di.di.modules.ActivityModule;
@@ -19,4 +20,5 @@ public interface MatchesComponent {
     void inject (TeamMatchesFragment fragment);
     void inject (TeamMatchActivity activity);
     void inject (LiveMatchesFragment fragment);
+    void inject (LiveMatchActivity activity);
 }

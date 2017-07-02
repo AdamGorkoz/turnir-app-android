@@ -1,6 +1,8 @@
 package turka.turnirapp.views.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
+import turka.turnirapp.LiveMatchActivity;
 import turka.turnirapp.model.LiveMatch;
 import turka.turnirapp.R;
 import turka.turnirapp.utils.MatchTimerFormatter;
@@ -67,6 +70,16 @@ public class LiveMatchesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if(holder.getItemViewType() == 1){
             final LiveMatchViewHolder liveMatchViewHolder = (LiveMatchViewHolder)holder;
             liveMatchViewHolder.setData((LiveMatch)current,position);
+
+            liveMatchViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = view.getContext();
+                    Intent intent = new Intent(context, LiveMatchActivity.class);
+                    intent.putExtra("match",liveMatchViewHolder.current);
+                    context.startActivity(intent);
+                }
+            });
             if(liveMatchViewHolder.timerSubscription != null && !liveMatchViewHolder.timerSubscription.isUnsubscribed()){
                 liveMatchViewHolder.timerSubscription.unsubscribe();
                 liveMatchViewHolder.timerSubscription = null;
@@ -100,15 +113,19 @@ public class LiveMatchesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     class LiveMatchViewHolder extends RecyclerView.ViewHolder {
 
         public Subscription timerSubscription;
+        CardView cardView;
         TextView firstTeamName;
         TextView score;
         TextView time;
         TextView secondTeamName;
         int position;
         LiveMatch current;
+        private final Context context;
 
         public LiveMatchViewHolder(View view) {
             super(view);
+            context = itemView.getContext();
+            this.cardView = (CardView) itemView.findViewById(R.id.card_view);
             this.firstTeamName = (TextView) itemView.findViewById(R.id.first_team_name);
             this.secondTeamName = (TextView) itemView.findViewById(R.id.second_team_name);
             this.score = (TextView) itemView.findViewById(R.id.match_score);
@@ -142,6 +159,7 @@ public class LiveMatchesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public void setTimerSubscription(Subscription timerSubscription) {
             this.timerSubscription = timerSubscription;
         }
+
     }
 
     class LiveMatchSectionViewHolder extends RecyclerView.ViewHolder {

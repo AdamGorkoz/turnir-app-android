@@ -1,7 +1,12 @@
 package turka.turnirapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.models.GoalModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +14,7 @@ import java.util.List;
  * Created by turka on 6/30/2017.
  */
 
-public class LiveMatch {
+public class LiveMatch implements Parcelable {
     private int ID;
     private Date MatchDate;
     private int FirstTeamID;
@@ -50,6 +55,44 @@ public class LiveMatch {
         Goals = goals;
         Field = field;
         MatchTypeID = matchTypeID;
+    }
+
+    public LiveMatch(Parcel in){
+        String[] data= new String[18];
+        in.readStringArray(data);
+
+        this.ID = Integer.parseInt(data[0]);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            this.MatchDate = sdf.parse(data[1]);
+        } catch (Exception e) {
+            this.MatchDate = null;
+        }
+        this.FirstTeamID = Integer.parseInt(data[2]);
+        this.FirstTeamName = data[3];
+        this.FirstTeamGoals = Integer.parseInt(data[4]);
+        this.SecondTeamID = Integer.parseInt(data[5]);
+        this.SecondTeamName = data[6];
+        this.SecondTeamGoals = Integer.parseInt(data[7]);
+        this.RefereeName = data[8];
+        this.MatchStatus = Integer.parseInt(data[9]);
+        this.Time = data[10];
+        try {
+            this.StartTime = sdf.parse(data[11]);
+        } catch (Exception e) {
+            this.StartTime = null;
+        }
+        try {
+            this.SecondHalfStartTime = sdf.parse(data[12]);
+        } catch (Exception e) {
+            this.SecondHalfStartTime = null;
+        }
+        this.IsSecondHalf = data[13] != null ? Boolean.parseBoolean(data[13]) : null;
+        this.Score = data[14];
+        this.MatchOutcome = Integer.parseInt(data[15]);
+        this.Goals = null;
+        this.Field = Integer.parseInt(data[16]);
+        this.MatchTypeID = Integer.parseInt(data[17]);
     }
 
     public int getID() {
@@ -203,4 +246,46 @@ public class LiveMatch {
     public void setMatchTypeID(int matchTypeID) {
         MatchTypeID = matchTypeID;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        parcel.writeStringArray(new String[]{String.valueOf(this.ID),
+                sdf.format(this.MatchDate),
+                String.valueOf(this.FirstTeamID),
+                this.FirstTeamName,
+                String.valueOf(this.FirstTeamGoals),
+                String.valueOf(this.SecondTeamID),
+                this.SecondTeamName,
+                String.valueOf(this.SecondTeamGoals),
+                this.RefereeName,
+                String.valueOf(this.MatchStatus),
+                this.Time,
+                this.StartTime != null ? sdf.format(this.StartTime) : null,
+                this.SecondHalfStartTime != null ? sdf.format(this.SecondHalfStartTime) : null,
+                this.IsSecondHalf != null ? String.valueOf(this.IsSecondHalf) : null,
+                this.Score,
+                String.valueOf(this.MatchOutcome),
+                String.valueOf(this.MatchStatus),
+                String.valueOf(this.MatchTypeID)}
+        );
+    }
+
+    public static final Parcelable.Creator<LiveMatch> CREATOR = new Parcelable.Creator<LiveMatch>() {
+
+        @Override
+        public LiveMatch createFromParcel(Parcel source) {
+            return new LiveMatch(source);
+        }
+
+        @Override
+        public LiveMatch[] newArray(int size) {
+            return new LiveMatch[size];
+        }
+    };
 }
