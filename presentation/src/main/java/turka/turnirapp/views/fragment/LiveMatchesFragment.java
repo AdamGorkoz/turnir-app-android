@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class LiveMatchesFragment extends Fragment implements LiveMatchesListView
         DaggerMatchesComponent.builder()
                 .applicationComponent(app.getApplicationComponent())
                 .build().inject(this);
+
         View fragmentView = inflater.inflate(R.layout.fragment_livematches_list, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout) fragmentView.findViewById(R.id.swipeRefreshLayout);
@@ -110,7 +112,7 @@ public class LiveMatchesFragment extends Fragment implements LiveMatchesListView
     }
 
     @Override
-    public void updateLiveMatchesList(List<LiveMatch> matches) {
+    public void updateLiveMatchesList(List<Object> matches) {
         if(mAdapter == null){
             mAdapter = new LiveMatchesAdapter(mContext, matches);
             liveMatchesList.setAdapter(mAdapter);

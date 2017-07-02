@@ -5,47 +5,36 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
+import rx.Observable;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 import turka.turnirapp.model.LiveMatch;
 import turka.turnirapp.R;
+import turka.turnirapp.utils.MatchTimerFormatter;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class LiveMatchesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Object> mData;
     private LayoutInflater mInflator;
 
-    public LiveMatchesAdapter(Context context , List<LiveMatch> matches) {
-        Collections.sort(matches, new Comparator<LiveMatch>() {
-            @Override
-            public int compare(LiveMatch match1, LiveMatch match2) {
-                return match1.getTime().compareTo(match2.getTime());
-            }
-        });
-
-        Set<String> timeSet = new HashSet<String>();
-        for (LiveMatch match : matches) {
-            timeSet.add(match.getTime());
-        }
-
-        mData = new ArrayList<Object>();
-
-        for(String time : timeSet){
-            mData.add(time);
-            for(LiveMatch match : matches){
-                if(match.getTime().equals(time)){
-                    mData.add(match);
-                }
-            }
-        }
-
+    public LiveMatchesAdapter(Context context , List<Object> data) {
+        this.mData = data;
         this.mInflator = LayoutInflater.from(context);
     }
 
@@ -76,7 +65,27 @@ public class LiveMatchesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         Object current = mData.get(position);
         if(holder.getItemViewType() == 1){
-            ((LiveMatchViewHolder)holder).setData((LiveMatch)current,position);
+            final LiveMatchViewHolder liveMatchViewHolder = (LiveMatchViewHolder)holder;
+            liveMatchViewHolder.setData((LiveMatch)current,position);
+            if(liveMatchViewHolder.timerSubscription != null && !liveMatchViewHolder.timerSubscription.isUnsubscribed()){
+                liveMatchViewHolder.timerSubscription.unsubscribe();
+                liveMatchViewHolder.timerSubscription = null;
+            }
+
+            liveMatchViewHolder.timerSubscription = Observable.interval(1, TimeUnit.SECONDS)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<Long>() {
+                        @Override
+                        public void call(Long aLong) {
+                            if(liveMatchViewHolder.current.getMatchStatus() == 1){
+                                LiveMatch match = liveMatchViewHolder.current;
+                                String timerString = MatchTimerFormatter.getFormattedMatchTimer(match.getSecondHalf() != null && match.getSecondHalf() ? match.getSecondHalfStartTime() :  match.getStartTime() , match.getSecondHalf());
+                                liveMatchViewHolder.time.setText(timerString);
+                            }
+                        }
+
+            });
         }
         else{
             ((LiveMatchSectionViewHolder)holder).setData((String)current);
@@ -90,6 +99,7 @@ public class LiveMatchesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     class LiveMatchViewHolder extends RecyclerView.ViewHolder {
 
+        public Subscription timerSubscription;
         TextView firstTeamName;
         TextView score;
         TextView time;
@@ -108,10 +118,29 @@ public class LiveMatchesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         public void setData(LiveMatch current, int position) {
             this.firstTeamName.setText(current.getFirstTeamName());
             this.secondTeamName.setText(current.getSecondTeamName());
-            this.time.setText(current.getTime());
+
+            switch(current.getMatchStatus()){
+                case 1:
+                    //this.time.setVisibility(View.GONE);
+                    break;
+                case 2:
+                    this.time.setVisibility(View.INVISIBLE);
+                    break;
+                case 3:
+                    this.time.setText("H.T");
+                    break;
+                case 4:
+                    this.time.setText("F.T");
+                    break;
+            }
+
             this.score.setText(current.getFirstTeamGoals() + "-" + current.getSecondTeamGoals());
             this.current = current;
             this.position = position;
+        }
+
+        public void setTimerSubscription(Subscription timerSubscription) {
+            this.timerSubscription = timerSubscription;
         }
     }
 

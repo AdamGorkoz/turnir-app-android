@@ -22,7 +22,7 @@ import turka.turnirapp.mvp.views.View;
 public class LiveMatchesPresenter implements Presenter {
 
     private LiveMatchesListView mLiveMatchesListView;
-    private List<LiveMatch> matches;
+    private List<Object> matches;
     private final GetLiveMatchesUsecase mGetLiveMatchesUsecase;
     private final LiveMatchMapper mLiveMatchMapper;
 
@@ -55,7 +55,7 @@ public class LiveMatchesPresenter implements Presenter {
 
     @Override
     public void onCreate() {
-        this.matches = new ArrayList<LiveMatch>();
+        this.matches = new ArrayList<Object>();
     }
 
     public void fetchLiveMatches() {
@@ -67,7 +67,7 @@ public class LiveMatchesPresenter implements Presenter {
         this.fetchLiveMatches();
     }
 
-    private final class LiveMatchesListSubscriber extends DefaultSubscriber<List<LiveMatchModel>> {
+    private final class LiveMatchesListSubscriber extends DefaultSubscriber<List<Object>> {
 
         @Override public void onCompleted() {
             mLiveMatchesListView.hideLoadingIndicator();
@@ -78,9 +78,19 @@ public class LiveMatchesPresenter implements Presenter {
             mLiveMatchesListView.showNoMatchesView();
         }
 
-        @Override public void onNext(List<LiveMatchModel> liveMatches) {
+        @Override public void onNext(List<Object> liveMatches) {
             LiveMatchesPresenter.this.matches.clear();
-            LiveMatchesPresenter.this.matches.addAll(mLiveMatchMapper.transform(liveMatches));
+            List<Object> mappedObjects = new ArrayList<Object>();
+            for (Object liveMatch :
+                    liveMatches) {
+                if(liveMatch instanceof  LiveMatchModel){
+                    mappedObjects.add(mLiveMatchMapper.transform((LiveMatchModel)liveMatch));
+                }else{
+                    mappedObjects.add(liveMatch);
+                }
+            }
+
+            LiveMatchesPresenter.this.matches.addAll(mappedObjects);
             mLiveMatchesListView.updateLiveMatchesList(LiveMatchesPresenter.this.matches);
             if(liveMatches.isEmpty() == false){
                 mLiveMatchesListView.hideNoMatchesView();

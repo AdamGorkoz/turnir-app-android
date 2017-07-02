@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="2:2"
+            android:layout_centerVertical="true"
             android:textSize="18sp" />
 
         <TextView
@@ -36,10 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/match_score"
             android:layout_centerHorizontal="true"
-            android:text="19:37"
+            android:text="--:--"
+            android:layout_marginTop="15dp"
             android:textSize="12sp" />
-
-
 
 
         <TextView

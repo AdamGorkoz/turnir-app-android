@@ -11,7 +11,7 @@ import turka.turnirapp.model.LiveMatch;
  */
 
 public interface LiveMatchesListView extends View {
-    void updateLiveMatchesList(List<LiveMatch> matches);
+    void updateLiveMatchesList(List<Object> matches);
     void showLoadingIndicator();
     void hideLoadingIndicator();
     void showNoMatchesView();
