@@ -4,12 +4,14 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.repository.AuthenticationRepository;
 import com.repository.LeagueRepository;
 import com.repository.MatchesRepository;
 import com.repository.MessagesRepository;
 import com.repository.PlayersRepository;
 
 import net.ApiConstants;
+import net.AuthenticationApi;
 import net.LeagueApi;
 import net.MatchesApi;
 import net.MessagesApi;
@@ -24,6 +26,7 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import repository.authentication.AuthenticationRespositoryImpl;
 import repository.league.LeagueRepositoryImpl;
 import repository.matches.MatchesRepositoryImpl;
 import repository.messages.MessagesRepositoryImpl;
@@ -99,6 +102,11 @@ public class ApplicationModule {
     }
 
     @Provides @Singleton
+    AuthenticationRepository provideAuthenticationRepository(AuthenticationRespositoryImpl restDataSource) {
+        return restDataSource;
+    }
+
+    @Provides @Singleton
     MessagesApi provideMessagesApi(){
         return getRestApiAdapter().create(MessagesApi.class);
     }
@@ -118,7 +126,10 @@ public class ApplicationModule {
         return getRestApiAdapter().create(MatchesApi.class);
     }
 
-
+    @Provides @Singleton
+    AuthenticationApi provideAuthenticationApi(){
+        return getRestApiAdapter().create(AuthenticationApi.class);
+    }
 
     @Provides @Named("executor_thread")
     Scheduler provideExecutorThread() {

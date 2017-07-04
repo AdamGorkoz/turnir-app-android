@@ -1,5 +1,7 @@
 package turka.turnirapp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -56,6 +58,13 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        if(item.getItemId() == R.id.nav_login){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         Fragment fragment = null;
         Class fragmentClass = null;
         switch(item.getItemId()){

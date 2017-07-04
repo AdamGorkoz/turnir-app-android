@@ -2,11 +2,13 @@ package turka.turnirapp.di.di.components;
 
 import android.content.Context;
 
+import com.repository.AuthenticationRepository;
 import com.repository.LeagueRepository;
 import com.repository.MatchesRepository;
 import com.repository.MessagesRepository;
 import com.repository.PlayersRepository;
 
+import net.AuthenticationApi;
 import net.LeagueApi;
 import net.MatchesApi;
 import net.MessagesApi;
@@ -45,4 +47,6 @@ public interface ApplicationComponent {
     PlayersApi playersApi();
     MatchesRepository matchesRepository();
     MatchesApi matchesApi();
+    AuthenticationRepository authenticationRepository();
+    AuthenticationApi authenticationApi();
 }
