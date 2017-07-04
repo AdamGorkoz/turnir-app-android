@@ -95,6 +95,9 @@ public class LiveMatchesPresenter implements Presenter {
             if(liveMatches.isEmpty() == false){
                 mLiveMatchesListView.hideNoMatchesView();
             }
+            else{
+                mLiveMatchesListView.showNoMatchesView();
+            }
         }
     }
 }
