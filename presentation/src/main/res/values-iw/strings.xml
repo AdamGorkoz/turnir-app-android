@@ -49,4 +49,5 @@
     <string name="prompt_email">שם משתמש</string>
     <string name="prompt_password">סיסמא</string>
     <string name="title_activity_login">התחברות</string>
+    <string name="no_live_matches">אין משחקים</string>
 </resources>
