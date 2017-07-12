@@ -33,4 +33,20 @@
     <string name="team_stats_points">נקודות</string>
     <string name="team_stats_position">מיקום</string>
     <string name="team_stats_wins">נצחונות</string>
+    <string name="action_sign_in">כניסה</string>
+    <string name="action_sign_in_short">התחברות</string>
+    <string name="error_field_required">יש למלא שדה זה</string>
+    <string name="error_incorrect_password">סיסמא שגויה</string>
+    <string name="error_invalid_email">שם משתמש שגוי</string>
+    <string name="error_invalid_password">סיסמא שגויה</string>
+    <string name="half_time">מחצית</string>
+    <string name="live_matches">תוצאות לייב</string>
+    <string name="login_pass_required">דרושה סיסמא</string>
+    <string name="login_username">שם משתמש</string>
+    <string name="login_username_required">דרוש שם  משתמש</string>
+    <string name="nav_login">התחברות</string>
+    <string name="permission_rationale">משהו</string>
+    <string name="prompt_email">שם משתמש</string>
+    <string name="prompt_password">סיסמא</string>
+    <string name="title_activity_login">התחברות</string>
 </resources>

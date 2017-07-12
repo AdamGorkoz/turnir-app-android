@@ -3,6 +3,8 @@ package turka.turnirapp;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -200,6 +202,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void onLoginResult(LoginResultModel loginResult) {
         if(loginResult != null){
+            SharedPreferences sharedPref = this.getSharedPreferences("com.turka.turnirapp.preferences",Context.MODE_PRIVATE);
+            sharedPref.edit().putString("authToken",loginResult.getAccess_token()).commit();
             finish();
         }
         else{

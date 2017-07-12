@@ -2,6 +2,7 @@ package turka.turnirapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,8 @@ import turka.turnirapp.views.BaseActivity;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener{
+
+    private NavigationView mNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,9 +44,22 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.replace(R.id.content_container,MessageFragment.newInstance());
         fragmentTransaction.commit();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        //SharedPreferences sharedPref = this.getSharedPreferences("com.turka.turnirapp.preferences",Context.MODE_PRIVATE);
+        //String authToken = sharedPref.getString("authToken",null);
+        //if(authToken != null){
+        //    mNavigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
+        //}
+        //else{
+        //    mNavigationView.getMenu().findItem(R.id.nav_login).setVisible(true);
+        //}
     }
 
     @Override

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Adiga Mundial</string>
+    <string name="app_name">Adiga Mundial</string>
     <string name="messages_title">Messages</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -57,4 +57,5 @@
     <string name="login_username">Username</string>
     <string name="login_pass_required">Password is required</string>
     <string name="login_username_required">Username is required</string>
+    <string name="action_settings">Settings</string>
 </resources>
